@@ -130,19 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770fe72f3a1f9db42bf1b411d9d9bd37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveAction:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 1a4c9258-99fe-448f-a6c4-815a0cbdfa80
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
   speed: 4
   maxHealth: 5
   timeInvincible: 2
   projectilePrefab: {fileID: 8146534533391192632, guid: 80a4e3f2ef61ee642b1d89b15d9a06c1, type: 3}
+  fireRate: 0.25
 --- !u!114 &3821487768204934265
 MonoBehaviour:
   m_ObjectHideFlags: 0
