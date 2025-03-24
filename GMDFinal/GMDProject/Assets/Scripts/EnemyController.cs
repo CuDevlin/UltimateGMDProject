@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     // Public variables
     public float speed;
+    public int damage = 1;
 
     // Public variables for health
     public int maxHealth = 2;
@@ -55,7 +56,7 @@ public class EnemyController : MonoBehaviour
         PlayerController player = other.gameObject.GetComponent<PlayerController>();
         if (player != null)
         {
-            player.ChangeHealth(-1); // Player is hit
+            player.ChangeHealth(damage); // Player is hit
         }
 
         // Check if the collision is with a projectile
