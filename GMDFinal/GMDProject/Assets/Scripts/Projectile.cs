@@ -4,6 +4,8 @@ public class Projectile : MonoBehaviour
 {
     private Rigidbody2D rigidbody2d;
 
+    public int damage = 1;
+
     // Awake is called when the Projectile GameObject is instantiated
     void Awake()
     {
@@ -32,14 +34,21 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Handle collisions (e.g., with the enemy)
         EnemyController enemy = other.GetComponent<EnemyController>();
         if (enemy != null)
         {
-            enemy.Fix();
-        }
+            // Debug log to check if the projectile hit the enemy
+            Debug.Log("Projectile hit enemy!");
 
-        // Destroy the projectile after it hits something
-        Destroy(gameObject);
+            // Apply knockback effect
+            Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
+            enemy.ApplyKnockback(knockbackDirection, 5f); // Knockback force
+
+            // Deal damage to the enemy
+            enemy.TakeDamage(damage); // Reduce enemy health by 1 (adjust as needed)
+
+            // Destroy the projectile
+            Destroy(gameObject);
+        }
     }
 }
