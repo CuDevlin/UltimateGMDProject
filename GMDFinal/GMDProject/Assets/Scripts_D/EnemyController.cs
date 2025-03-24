@@ -64,5 +64,8 @@ public class EnemyController : MonoBehaviour
     {
         broken = false;
         GetComponent<Rigidbody2D>().simulated = false;
+
+        // Destroy the enemy GameObject after being fixed or hit
+        Destroy(gameObject);
     }
 }

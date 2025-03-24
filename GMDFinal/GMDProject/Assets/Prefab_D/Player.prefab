@@ -134,7 +134,7 @@ MonoBehaviour:
   maxHealth: 5
   timeInvincible: 2
   projectilePrefab: {fileID: 8146534533391192632, guid: 80a4e3f2ef61ee642b1d89b15d9a06c1, type: 3}
-  fireRate: 0.25
+  fireRate: 0.1
 --- !u!114 &3821487768204934265
 MonoBehaviour:
   m_ObjectHideFlags: 0

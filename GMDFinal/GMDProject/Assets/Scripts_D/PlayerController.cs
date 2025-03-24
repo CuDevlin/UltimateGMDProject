@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
   // Variables related to projectiles
    public GameObject projectilePrefab;
    public float fireRate = 0.5f; // Time between shots in seconds
-   private float fireCooldown = 0.5f; // Tracks the time left before the player can fire again
+   private float fireCooldown = 1f; // Tracks the time left before the player can fire again
 
    // Start is called before the first frame update
    void Awake()
