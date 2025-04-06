@@ -1,7 +1,7 @@
 # Game Design Document
 
 Adrian Bugiel
-01-04-2025 (a bit late)
+01-04-2025
 
 ## High Level Concept
 
@@ -62,3 +62,8 @@ The game will use simple sprite graphics with assets found on the internet. The 
 
 # Project Milestones
 
+| Phase | Focus | Description |
+|----------|----------|----------|
+| 1 | Core Mechanics  | Player controls, enemies, combat, spawning  |
+| 2  | Progression & Scaling  | Leveling, passives, currency, power-ups  |
+| 3  | 	Replayability & Game Loop  | Multiple stages, run structure, randomization  |
