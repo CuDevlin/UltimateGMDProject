@@ -1,0 +1,69 @@
+# Game Design Document
+
+Adrian Bugiel
+01-04-2025
+
+## High Level Concept
+
+### Working Title:
+
+Zombie Survivors
+
+### Concept Statement:
+
+A 2D top-down game with player character fighting through endless waves of zombies. In order to survive the player must avoid taking damage and gain experience, allowing the choice of various power-ups upon level up.
+
+### Genre:
+
+Roguelike auto-attacker
+
+### Target Audience:
+
+Hardcore gamers including all VIA students, also Kasper and Jacob
+
+### Unique Selling Points:
+
+* Fast and engaging combat
+* Power-up progression system
+* Deep character builds
+* Designed for VIA arcade machine
+
+## Product Design
+
+### Player Experience and Game POV:
+
+You play as a lone fighter/soldier in a world filled with undead hordes of zombies. The game uses a top-down perspective with auto-attacks based on cooldown. The player feels constantly pressured by spawning waves of enemies. Gameplay is focused on smart positioning to avoid damange and build choices to make power-ups scale with each other.
+
+### Visual Style:
+
+The game will use simple sprite graphics with assets found on the internet. The final visual style is still to be decided but the current plan is to use gothic/medieval themed characters and environments.
+
+### Game World Fiction:
+
+### Platform(s), Technology and Scope
+
+## Detailed & Game Systems Design
+
+### Core Loops:
+
+* Kill zombies -> Gain EXP -> Level up -> Choose power-ups -> Survive through tougher enemies
+
+### Objectives and Progression:
+
+* Survive as long as possible (10 minutes)
+* Progress through waves with increasingly difficult enemy types
+
+## Game Systems: 
+
+* Leveling/EXP System
+* Enemy Waves & Spawning System
+* Health, Damage, Collision, Knockback
+* Power-up synergy system
+
+# Project Milestones
+
+| Phase | Focus | Description |
+|----------|----------|----------|
+| 1 | Core Mechanics  | Player controls, enemies, combat, spawning  |
+| 2  | Progression & Scaling  | Leveling, passives, currency, power-ups  |
+| 3  | 	Replayability & Game Loop  | Multiple stages, run structure, randomization  |
