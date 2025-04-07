@@ -13,14 +13,15 @@ The player movement system was built using Unity’s new Input System, allowing 
 
 The movement is handled in FixedUpdate() to keep it in sync with Unity’s physics engine, ensuring smoother motion. The movement vector updates based on player input and moves the Rigidbody2D:
 
-csharp
-Copy
-Edit
+---
+```csharp
 void FixedUpdate()
 {
     Vector2 position = (Vector2)rigidbody2d.position + moveInput * speed * Time.deltaTime;
     rigidbody2d.MovePosition(position);
 }
+```
+---
 One of the key improvements was allowing the player to fire projectiles in the direction they last moved, ensuring that when stationary, projectiles still fire in the intended direction.
 
 ### Projectile System & Fire Rate Control
