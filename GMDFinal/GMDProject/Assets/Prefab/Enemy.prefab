@@ -10,10 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2243444367387775122}
   - component: {fileID: 4630729929284890783}
-  - component: {fileID: 640184677313334876}
   - component: {fileID: 2608947784759626622}
   - component: {fileID: 7457651592152178177}
   - component: {fileID: -868740780736264338}
+  - component: {fileID: 4395620843581303462}
+  - component: {fileID: 4861237871658194214}
+  - component: {fileID: -211159426940591906}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -91,21 +93,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &640184677313334876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8927966942734658956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09f0232529574da4798ceece3fe9f319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  damage: 1
-  maxHealth: 2
 --- !u!61 &2608947784759626622
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -201,3 +188,48 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4395620843581303462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8927966942734658956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f0232529574da4798ceece3fe9f319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+--- !u!114 &4861237871658194214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8927966942734658956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1ca11cd0079ba646b3400b1b4370368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 2
+  isPlayer: 0
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-211159426940591906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8927966942734658956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54cac90ee3727e419ccd6b15980fac0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contactDamage: 1
+  useTrigger: 1
+  damageCooldown: 2

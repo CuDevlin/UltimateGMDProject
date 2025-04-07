@@ -11,10 +11,12 @@ GameObject:
   - component: {fileID: 1213718066348686921}
   - component: {fileID: 5950313724107371692}
   - component: {fileID: 8972531883329761882}
-  - component: {fileID: 6157993069274198087}
   - component: {fileID: 3821487768204934265}
   - component: {fileID: 1173644457885618418}
   - component: {fileID: 660835580667956658}
+  - component: {fileID: -3001216932255314109}
+  - component: {fileID: 4687206425855895826}
+  - component: {fileID: -1251079804820970041}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -119,23 +121,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6157993069274198087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2912724059962043203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 770fe72f3a1f9db42bf1b411d9d9bd37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 4
-  maxHealth: 5
-  timeInvincible: 2
-  projectilePrefab: {fileID: 8146534533391192632, guid: 80a4e3f2ef61ee642b1d89b15d9a06c1, type: 3}
-  fireRate: 0.1
 --- !u!114 &3821487768204934265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,3 +219,48 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-3001216932255314109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912724059962043203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 770fe72f3a1f9db42bf1b411d9d9bd37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+--- !u!114 &4687206425855895826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912724059962043203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1ca11cd0079ba646b3400b1b4370368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  isPlayer: 1
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-1251079804820970041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912724059962043203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ca2b53e4f585246b66ed1b4452f1aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 8146534533391192632, guid: 80a4e3f2ef61ee642b1d89b15d9a06c1, type: 3}
+  projectileSpeed: 6
+  fireRate: 0.5

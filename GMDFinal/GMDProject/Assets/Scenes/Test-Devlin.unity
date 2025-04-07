@@ -522,12 +522,9 @@ PrefabInstance:
       propertyPath: m_Actions
       value: 
       objectReference: {fileID: -944628639613478452, guid: 1a959405cf16e28478564deb1c09c4bf, type: 3}
-    - target: {fileID: 6157993069274198087, guid: 50f6c423499da694994e5e12fec8c17c, type: 3}
-      propertyPath: fireRate
-      value: 0.25
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 660835580667956658, guid: 50f6c423499da694994e5e12fec8c17c, type: 3}
+    - {fileID: 1913668350604031858, guid: 50f6c423499da694994e5e12fec8c17c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -547,18 +544,6 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: eb984caded128d746941e9595d4c3b3b, type: 2}
-    - target: {fileID: 640184677313334876, guid: a29dae6dd119b1246aa29e3456629d87, type: 3}
-      propertyPath: speed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 640184677313334876, guid: a29dae6dd119b1246aa29e3456629d87, type: 3}
-      propertyPath: vertical
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 640184677313334876, guid: a29dae6dd119b1246aa29e3456629d87, type: 3}
-      propertyPath: maxHealth
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2243444367387775122, guid: a29dae6dd119b1246aa29e3456629d87, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
