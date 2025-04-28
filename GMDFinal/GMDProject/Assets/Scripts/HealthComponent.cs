@@ -8,6 +8,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
     public bool isPlayer = false;
 
     public UnityEvent<int, int> OnHealthChanged; // Optional if you prefer UnityEvents
+    public ExperienceManager experienceManager;
 
     void Awake()
     {
@@ -44,5 +45,6 @@ public class HealthComponent : MonoBehaviour, IDamageable
         }
 
         Destroy(gameObject);
+        experienceManager.GainExperience(10); 
     }
 }

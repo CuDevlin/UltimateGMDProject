@@ -249,6 +249,7 @@ MonoBehaviour:
   OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
+  experienceManager: {fileID: 2160556182398778562, guid: 19770afefa2ab4045834c7e190902465, type: 3}
 --- !u!114 &-1251079804820970041
 MonoBehaviour:
   m_ObjectHideFlags: 0
