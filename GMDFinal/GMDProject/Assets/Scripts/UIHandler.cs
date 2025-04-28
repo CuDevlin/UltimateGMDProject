@@ -10,13 +10,13 @@ public class UIHandler : MonoBehaviour
    private void Awake()
    {
        instance = this;
+       UIDocument uiDocument = GetComponent<UIDocument>();
+       m_Healthbar = uiDocument.rootVisualElement.Q<VisualElement>("HealthBar");
    }
 
    // Start is called before the first frame update
    void Start()
-   {
-       UIDocument uiDocument = GetComponent<UIDocument>();
-       m_Healthbar = uiDocument.rootVisualElement.Q<VisualElement>("HealthBar");
+   {       
        SetHealthValue(1.0f);
    }
 
