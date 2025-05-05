@@ -11,52 +11,58 @@ public class UIHandler : MonoBehaviour
     private VisualElement m_HealthBarContainer;
     private VisualElement m_HealthBarFill;
 
+    private Button m_PlayButton;
+    private Button m_QuitButton;
+
     private float maxHealthBarWidth = 300f; // Set the maximum width for health bar container
     private float minHealthBarWidth = 100f; // Set a minimum width for the health bar container
 
     private void Awake()
     {
-        // Singleton pattern to ensure only one instance of UIHandler
+        // Singleton pattern
         instance = this;
 
-        // Get the UIDocument component attached to the same GameObject
+        // Get the UIDocument
         UIDocument uiDocument = GetComponent<UIDocument>();
-
         if (uiDocument == null)
         {
             Debug.LogError("UIDocument component is not attached to the GameObject.");
             return;
         }
 
-        // Initialize the root VisualElement from the UIDocument
+        // Root UI element
         m_Root = uiDocument.rootVisualElement;
 
-        // Query the MainMenu and GameUI from the UXML
+        // Get UI containers
         m_MainMenu = m_Root.Q<VisualElement>("MainMenu");
         m_GameUI = m_Root.Q<VisualElement>("GameUI");
 
-        // Query the health bar container and fill
+        // Get health bar elements
         m_HealthBarContainer = m_Root.Q<VisualElement>("HealthBarContainer");
         m_HealthBarFill = m_HealthBarContainer.Q<VisualElement>("HealthBarFill");
 
-        // Initial visibility settings
-        m_MainMenu.style.display = DisplayStyle.Flex;  // Show MainMenu
-        m_GameUI.style.display = DisplayStyle.None;    // Hide GameUI initially
+        // Set initial visibility
+        m_MainMenu.style.display = DisplayStyle.Flex;
+        m_GameUI.style.display = DisplayStyle.None;
 
-        // Setup button events
-        m_MainMenu.Q<Button>("play-button").clicked += OnPlayClicked;
-        m_MainMenu.Q<Button>("quit-button").clicked += OnQuitClicked;
+        // Get buttons
+        m_PlayButton = m_MainMenu.Q<Button>("play-button");
+        m_QuitButton = m_MainMenu.Q<Button>("quit-button");
+
+        // Setup button callbacks
+        m_PlayButton.clicked += OnPlayClicked;
+        m_QuitButton.clicked += OnQuitClicked;
+
+        // Set initial focus to Play button
+        m_PlayButton.Focus();
     }
 
     private void OnPlayClicked()
     {
-        // Hide Main Menu
         m_MainMenu.style.display = DisplayStyle.None;
-
-        // Show Game UI
         m_GameUI.style.display = DisplayStyle.Flex;
 
-        // Reset health bar to full (100%)
+        // Reset health bar
         SetHealthValue(1.0f);
     }
 
@@ -68,15 +74,12 @@ public class UIHandler : MonoBehaviour
 #endif
     }
 
-    // Set the health bar fill percentage
+    // Update health bar fill
     public void SetHealthValue(float percentage)
     {
         if (m_HealthBarFill != null && m_HealthBarContainer != null)
         {
-            // Ensure health percentage is between 0 and 1
             percentage = Mathf.Clamp01(percentage);
-
-            // Update the fill width based on the health percentage
             m_HealthBarFill.style.width = Length.Percent(100 * percentage);
         }
         else
@@ -85,13 +88,10 @@ public class UIHandler : MonoBehaviour
         }
     }
 
-    // Method to update the max health bar size (only changes the container width)
+    // Update container width based on max health
     public void UpdateMaxHealth(int newMaxHealth)
     {
-        // Adjust the max width based on new max health value
-        maxHealthBarWidth = Mathf.Max(newMaxHealth * 20, 300f); // Adjust multiplier if needed
-
-        // Update the health bar container's width based on the new max health
+        maxHealthBarWidth = Mathf.Max(newMaxHealth * 20, 300f);
         m_HealthBarContainer.style.width = maxHealthBarWidth;
     }
 }
