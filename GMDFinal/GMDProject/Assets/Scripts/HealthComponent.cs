@@ -17,7 +17,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
         // Update UI if this is the player
         if (isPlayer)
         {
-            UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth);
+            UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth); // Initialize health bar
         }
     }
 
@@ -27,7 +27,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
 
         if (isPlayer)
         {
-            UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth);
+            UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth); // Update health bar
         }
 
         if (currentHealth <= 0)
@@ -45,6 +45,18 @@ public class HealthComponent : MonoBehaviour, IDamageable
         }
 
         Destroy(gameObject);
-        experienceManager.GainExperience(10); 
+        experienceManager.GainExperience(10);
+    }
+
+    // You can call this method when the player's health upgrades
+    public void UpgradeHealth(int additionalHealth)
+    {
+        maxHealth += additionalHealth;
+        currentHealth = maxHealth; // Set health to max if upgraded
+        if (isPlayer)
+        {
+            UIHandler.instance?.UpdateMaxHealth(maxHealth); // Update the max health bar size
+            UIHandler.instance?.SetHealthValue(1.0f); // Update health to full
+        }
     }
 }

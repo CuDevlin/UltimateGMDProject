@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using System.Collections;
 
 public class UIHandler : MonoBehaviour
 {
@@ -9,10 +8,11 @@ public class UIHandler : MonoBehaviour
     private VisualElement m_Root;
     private VisualElement m_MainMenu;
     private VisualElement m_GameUI;
-    private VisualElement m_Healthbar;
-    private VisualElement m_FadeOverlay;
+    private VisualElement m_HealthBarContainer;
+    private VisualElement m_HealthBarFill;
 
-    private const float FADE_DURATION = 0.5f;
+    private float maxHealthBarWidth = 300f; // Set the maximum width for health bar container
+    private float minHealthBarWidth = 100f; // Set a minimum width for the health bar container
 
     private void Awake()
     {
@@ -35,14 +35,13 @@ public class UIHandler : MonoBehaviour
         m_MainMenu = m_Root.Q<VisualElement>("MainMenu");
         m_GameUI = m_Root.Q<VisualElement>("GameUI");
 
-        // Query Game UI elements like the HealthBar and FadeOverlay
-        m_Healthbar = m_Root.Q<VisualElement>("HealthBar");
-        m_FadeOverlay = m_Root.Q<VisualElement>("FadeOverlay");
+        // Query the health bar container and fill
+        m_HealthBarContainer = m_Root.Q<VisualElement>("HealthBarContainer");
+        m_HealthBarFill = m_HealthBarContainer.Q<VisualElement>("HealthBarFill");
 
         // Initial visibility settings
         m_MainMenu.style.display = DisplayStyle.Flex;  // Show MainMenu
         m_GameUI.style.display = DisplayStyle.None;    // Hide GameUI initially
-        m_FadeOverlay.style.opacity = 0;  // Hide fade overlay initially
 
         // Setup button events
         m_MainMenu.Q<Button>("play-button").clicked += OnPlayClicked;
@@ -51,25 +50,14 @@ public class UIHandler : MonoBehaviour
 
     private void OnPlayClicked()
     {
-        // Start fade and UI switch when play is clicked
-        StartCoroutine(FadeAndSwitchUI());
-    }
-
-    private IEnumerator FadeAndSwitchUI()
-    {
-        // Show the fade-to-black overlay
-        m_FadeOverlay.AddToClassList("fade-visible");
-        yield return new WaitForSeconds(FADE_DURATION);
-
-        // Switch UIs: Hide MainMenu, Show GameUI
+        // Hide Main Menu
         m_MainMenu.style.display = DisplayStyle.None;
+
+        // Show Game UI
         m_GameUI.style.display = DisplayStyle.Flex;
 
-        // Optionally reset the health bar
+        // Reset health bar to full (100%)
         SetHealthValue(1.0f);
-
-        // Fade out the black overlay (to reveal GameUI)
-        m_FadeOverlay.RemoveFromClassList("fade-visible");
     }
 
     private void OnQuitClicked()
@@ -80,15 +68,30 @@ public class UIHandler : MonoBehaviour
 #endif
     }
 
+    // Set the health bar fill percentage
     public void SetHealthValue(float percentage)
     {
-        if (m_Healthbar != null)
+        if (m_HealthBarFill != null && m_HealthBarContainer != null)
         {
-            m_Healthbar.style.width = Length.Percent(100 * percentage);  // Update the health bar width
+            // Ensure health percentage is between 0 and 1
+            percentage = Mathf.Clamp01(percentage);
+
+            // Update the fill width based on the health percentage
+            m_HealthBarFill.style.width = Length.Percent(100 * percentage);
         }
         else
         {
-            Debug.LogError("HealthBar element not found!");
+            Debug.LogError("HealthBar elements not found!");
         }
+    }
+
+    // Method to update the max health bar size (only changes the container width)
+    public void UpdateMaxHealth(int newMaxHealth)
+    {
+        // Adjust the max width based on new max health value
+        maxHealthBarWidth = Mathf.Max(newMaxHealth * 20, 300f); // Adjust multiplier if needed
+
+        // Update the health bar container's width based on the new max health
+        m_HealthBarContainer.style.width = maxHealthBarWidth;
     }
 }

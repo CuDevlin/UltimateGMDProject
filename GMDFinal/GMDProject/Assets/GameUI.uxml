@@ -1,5 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements">
-
     <ui:Style src="MainMenuStyle.uss" />
 
     <!-- Root container for both UIs -->
@@ -15,12 +14,11 @@
 
         <!-- Game UI -->
         <ui:VisualElement name="GameUI" class="game-ui-container">
-            <ui:VisualElement name="HealthBar" class="health-bar"></ui:VisualElement>
-            <!-- Add more game UI elements as needed -->
+            <!-- Health Bar -->
+            <ui:VisualElement name="HealthBarContainer" class="health-bar-container">
+                <ui:VisualElement name="HealthBarFill" class="health-bar-fill" />
+            </ui:VisualElement>
         </ui:VisualElement>
 
-        <!-- Overlay for fade-to-black effect -->
-        <ui:VisualElement name="FadeOverlay" class="fade-overlay" />
     </ui:VisualElement>
-
 </ui:UXML>
