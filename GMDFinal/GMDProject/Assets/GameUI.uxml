@@ -1,7 +1,26 @@
-<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:VisualElement name="HealthBarBackground" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Art/Player/UI/UIHealthFrameDucko.png?fileID=21300000&amp;guid=64db56407333fdc42979ea9bd17df346&amp;type=3#UIHealthFrameDucko&quot;); width: 20%; height: 20%; -unity-background-scale-mode: scale-to-fit;">
-        <engine:VisualElement name="HealthBarContainer" style="flex-grow: 1; position: absolute; height: 55px; width: 211px; top: 76px; left: 157px;">
-            <engine:VisualElement name="HealthBar" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/Player/UI/UIHealthBarDucko.png?fileID=21300000&amp;guid=cf2e18060a0f0fb4eb12c91fd892a97e&amp;type=3#UIHealthBarDucko&quot;); height: 33px; width: 211px;" />
-        </engine:VisualElement>
-    </engine:VisualElement>
-</engine:UXML>
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+
+    <ui:Style src="MainMenuStyle.uss" />
+
+    <!-- Root container for both UIs -->
+    <ui:VisualElement name="Root" class="fullscreen-root">
+
+        <!-- Main Menu -->
+        <ui:VisualElement name="MainMenu" class="main-menu-container">
+            <ui:Label text="Main Menu" class="title-label" />
+            <ui:Button name="play-button" text="Play" class="menu-button" />
+            <ui:Button name="settings-button" text="Settings" class="menu-button" />
+            <ui:Button name="quit-button" text="Quit" class="menu-button" />
+        </ui:VisualElement>
+
+        <!-- Game UI -->
+        <ui:VisualElement name="GameUI" class="game-ui-container">
+            <ui:VisualElement name="HealthBar" class="health-bar"></ui:VisualElement>
+            <!-- Add more game UI elements as needed -->
+        </ui:VisualElement>
+
+        <!-- Overlay for fade-to-black effect -->
+        <ui:VisualElement name="FadeOverlay" class="fade-overlay" />
+    </ui:VisualElement>
+
+</ui:UXML>
