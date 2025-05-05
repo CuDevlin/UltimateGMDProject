@@ -1,24 +1,19 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements">
-    <ui:Style src="MainMenuStyle.uss" />
-
-    <!-- Root container for both UIs -->
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=012f13c49cf288446bf6bc6c033123e3&amp;type=3#MainMenuStyle" />
     <ui:VisualElement name="Root" class="fullscreen-root">
-
-        <!-- Main Menu -->
         <ui:VisualElement name="MainMenu" class="main-menu-container">
             <ui:Label text="Main Menu" class="title-label" />
             <ui:Button name="play-button" text="Play" class="menu-button" />
             <ui:Button name="settings-button" text="Settings" class="menu-button" />
             <ui:Button name="quit-button" text="Quit" class="menu-button" />
         </ui:VisualElement>
-
-        <!-- Game UI -->
         <ui:VisualElement name="GameUI" class="game-ui-container">
-            <!-- Health Bar -->
-            <ui:VisualElement name="HealthBarContainer" class="health-bar-container">
-                <ui:VisualElement name="HealthBarFill" class="health-bar-fill" />
+            <ui:VisualElement name="HealthBar" style="flex-grow: 1; position: absolute; height: 72px; width: 347px;">
+                <ui:VisualElement name="HealthBarContainer" class="health-bar-container" style="height: 20px; width: 301px; left: 12px;">
+                    <ui:VisualElement name="HealthBarFill" class="health-bar-fill" />
+                </ui:VisualElement>
+                <ui:VisualElement name="HeartImg" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/Player/UI/hearth-pixel.png?fileID=21300000&amp;guid=1420bbd02200c93428da75e315f4af34&amp;type=3#hearth-pixel&quot;); width: 100px; height: 100px; background-position-y: center 10px; background-position-x: center 10px; -unity-background-scale-mode: scale-to-fit; transform-origin: left top; position: absolute; top: -12px; left: -22px;" />
             </ui:VisualElement>
         </ui:VisualElement>
-
     </ui:VisualElement>
 </ui:UXML>
