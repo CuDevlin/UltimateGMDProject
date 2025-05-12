@@ -9,7 +9,7 @@ public class ExperienceManager : MonoBehaviour
     public int currentExperience = 0;
     public int currentLevel = 1;
     public int experienceToNextLevel = 100;
-    public float experienceGrowthRate = 1.2f; // Multiplies XP needed per level-up
+    public float experienceGrowthRate = 1.2f;
 
     public event Action<int> OnLevelUp;
     public event Action<int> OnExperienceChanged;
@@ -21,6 +21,7 @@ public class ExperienceManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        Debug.Log("ExperienceManager instance set.");
         Instance = this;
     }
 

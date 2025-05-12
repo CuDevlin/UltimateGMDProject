@@ -3,27 +3,43 @@ using UnityEngine.Events;
 
 public class HealthComponent : MonoBehaviour, IDamageable
 {
+    [Header("Health Settings")]
     public int maxHealth = 5;
     private int currentHealth;
     public bool isPlayer = false;
 
-    public UnityEvent<int, int> OnHealthChanged; // Optional if you prefer UnityEvents
-    public ExperienceManager experienceManager;
+    public UnityEvent<int, int> OnHealthChanged;
 
-    void Awake()
+    private void Awake()
     {
         currentHealth = maxHealth;
 
-        // Update UI if this is the player
         if (isPlayer)
         {
-            UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth); // Initialize health bar
+            UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth);
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (isPlayer && ExperienceManager.Instance != null)
+        {
+            ExperienceManager.Instance.OnLevelUp += HandleLevelUp;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (isPlayer && ExperienceManager.Instance != null)
+        {
+            ExperienceManager.Instance.OnLevelUp -= HandleLevelUp;
         }
     }
 
     public void TakeDamage(int amount)
     {
         currentHealth = Mathf.Clamp(currentHealth - amount, 0, maxHealth);
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
         if (isPlayer)
         {
@@ -36,27 +52,39 @@ public class HealthComponent : MonoBehaviour, IDamageable
         }
     }
 
-    void Die()
+    private void Die()
     {
-        // You can play death animation or do something else
+        EnemyController enemyController = GetComponent<EnemyController>();
+        if (enemyController != null)
+        {
+            enemyController.DisableMovement();
+            enemyController.HandleEnemyDeath();  // Explicitly call it before destruction
+        }
+
         if (isPlayer)
         {
             Debug.Log("Player died");
         }
 
         Destroy(gameObject);
-        experienceManager.GainExperience(10);
     }
 
-    // You can call this method when the player's health upgrades
-    public void UpgradeHealth(int additionalHealth)
+    private void HandleLevelUp(int newLevel)
     {
-        maxHealth += additionalHealth;
-        currentHealth = maxHealth; // Set health to max if upgraded
+        ApplyLevelUpBonus(newLevel);
+    }
+
+    private void ApplyLevelUpBonus(int level)
+    {
+        int healthBonus = Mathf.FloorToInt(level * 1.2f);  // Example: Bonus increases with level
+        maxHealth += healthBonus;
+        currentHealth = maxHealth;
+
         if (isPlayer)
         {
-            UIHandler.instance?.UpdateMaxHealth(maxHealth); // Update the max health bar size
-            UIHandler.instance?.SetHealthValue(1.0f); // Update health to full
+            UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth);
         }
+
+        Debug.Log($"Level Up! New Max Health: {maxHealth}");
     }
 }

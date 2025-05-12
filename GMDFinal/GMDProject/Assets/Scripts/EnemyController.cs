@@ -1,11 +1,17 @@
 using UnityEngine;
+using System;
+
 public class EnemyController : MonoBehaviour
 {
+    [Header("Enemy Settings")]
     public float speed = 2f;
+    public int experienceReward = 10;
 
     private Rigidbody2D rb;
     private Transform player;
     private bool isChasing = true;
+
+    public event Action<GameObject> OnEnemyDestroyed;
 
     void Awake()
     {
@@ -22,10 +28,27 @@ public class EnemyController : MonoBehaviour
         rb.MovePosition(newPosition);
     }
 
-    // Optional: Hook up to HealthComponent death event
     public void DisableMovement()
     {
         isChasing = false;
         rb.simulated = false;
+    }
+
+    public void HandleEnemyDeath()
+    {
+        if (ExperienceManager.Instance != null)
+        {
+            ExperienceManager.Instance.GainExperience(experienceReward);
+        }
+          else
+        {
+            Debug.LogWarning("ExperienceManager instance is null.");
+        }
+
+        OnEnemyDestroyed?.Invoke(gameObject);
+    }
+
+    private void OnDestroy()
+    {
     }
 }
