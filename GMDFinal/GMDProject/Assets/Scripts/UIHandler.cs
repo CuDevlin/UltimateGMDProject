@@ -59,6 +59,10 @@ public class UIHandler : MonoBehaviour
         m_DeathRestartButton = m_DeathPopup.Q<Button>("restart-button");
         m_DeathQuitButton = m_DeathPopup.Q<Button>("death-quit-button");
 
+        // Set the GameUI to be hidden initially.
+        m_GameUI.style.display = DisplayStyle.None;
+
+        // Assign button click events
         m_PlayButton.clicked += OnPlayClicked;
         m_QuitButton.clicked += OnQuitClicked;
         m_DeathRestartButton.clicked += OnRestartClicked;
@@ -92,16 +96,22 @@ public class UIHandler : MonoBehaviour
 
     public void ShowMainMenu()
     {
+        // Hide the GameUI and DeathPopup, show MainMenu
         m_GameUI.style.display = DisplayStyle.None;
         m_DeathPopup.style.display = DisplayStyle.None;
         m_MainMenu.style.display = DisplayStyle.Flex;
 
+        // Set the background color of the root to black when in main menu
+        m_Root.style.backgroundColor = new StyleColor(Color.black);
+
+        // Disable player controls and enemy spawner while in the main menu
         if (playerController != null)
             playerController.EnableControls(false);
 
         if (enemySpawner != null)
             enemySpawner.SetSpawningEnabled(false);
 
+        // Reset experience bar and level to default
         if (UIHandler.instance != null)
         {
             UIHandler.instance.SetExperienceValue(0f);  // Reset experience bar to 0%
@@ -111,12 +121,25 @@ public class UIHandler : MonoBehaviour
 
     private void OnPlayClicked()
     {
+        // Hide MainMenu and show GameUI
         m_MainMenu.style.display = DisplayStyle.None;
         m_GameUI.style.display = DisplayStyle.Flex;
 
-        SetHealthValue(1.0f);  // Initialize health bar to full (100%)
+        // Remove the black background when transitioning to the game
+        m_Root.style.backgroundColor = new StyleColor(Color.clear);
 
+        // Initialize health bar to full (100%)
+        SetHealthValue(1.0f);
+
+        // Start the game through GameManager
         GameManager.Instance.StartGame();
+
+        // Enable player controls and enemy spawner when the game starts
+        if (playerController != null)
+            playerController.EnableControls(true);
+
+        if (enemySpawner != null)
+            enemySpawner.SetSpawningEnabled(true);
     }
 
     private void OnQuitClicked()

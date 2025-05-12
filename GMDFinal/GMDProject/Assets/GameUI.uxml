@@ -1,8 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=012f13c49cf288446bf6bc6c033123e3&amp;type=3#MainMenuStyle" />
 
-    <ui:VisualElement name="Root" class="fullscreen-root">
-
+    <ui:VisualElement name="Root" class="fullscreen-root" style="background-color: transparent;">
         <ui:VisualElement name="GameUI" class="game-ui-container">
             <ui:VisualElement name="HealthBar" style="flex-grow: 1; position: absolute; height: 68px; width: 554px;">
                 <ui:VisualElement name="HealthBarContainer" class="health-bar-container">
@@ -29,8 +28,6 @@
             <ui:Button name="quit-button" text="Quit" class="menu-button" />
         </ui:VisualElement>
 
-        <!-- Fix: all elements must use ui: namespace -->
-        <!-- Fix: unique button names (renamed quit-button to death-quit-button) -->
         <ui:VisualElement name="DeathPopup" style="display: none; position: absolute; top: 40%; left: 40%; width: 200px; height: 150px; background-color: #000000cc; padding: 10px; border-radius: 8px;">
             <ui:Label name="DeathMessage" text="You Died!" style="unity-font-style: bold; font-size: 24px; color: white; text-align: center;" />
             <ui:Button name="restart-button" text="MainMenu" class="restart-button" />
