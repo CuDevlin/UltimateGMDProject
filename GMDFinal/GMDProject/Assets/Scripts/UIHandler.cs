@@ -55,8 +55,9 @@ public class UIHandler : MonoBehaviour
         if (ExperienceManager.Instance != null)
         {
             ExperienceManager.Instance.OnExperienceChanged += OnExperienceChanged;
-            
-            // Immediately sync UI to current experience
+            ExperienceManager.Instance.OnLevelUp += OnLevelUp;
+
+            // Sync initial EXP
             OnExperienceChanged(ExperienceManager.Instance.currentExperience);
         }
     }
@@ -92,10 +93,12 @@ public class UIHandler : MonoBehaviour
 
     public void SetExperienceValue(float percentage)
     {
+        Debug.Log($"[EXP BAR] Setting experience bar to: {percentage * 100}%");
+
         if (m_ExpBarFill != null && m_ExpBarContainer != null)
         {
             percentage = Mathf.Clamp01(percentage);
-            m_ExpBarFill.style.width = Length.Percent(100 * percentage);
+            m_ExpBarFill.style.width = Length.Percent(percentage * 100);
         }
         else
         {
@@ -109,12 +112,15 @@ public class UIHandler : MonoBehaviour
         m_HealthBarContainer.style.width = maxHealthBarWidth;
     }
 
-    private void OnExperienceChanged(int currentExp)
+    private void OnExperienceChanged(int currentXP)
     {
-        if (ExperienceManager.Instance != null)
-        {
-            float percent = (float)currentExp / ExperienceManager.Instance.experienceToNextLevel;
-            SetExperienceValue(percent);
-        }
+        float percent = currentXP / (float)ExperienceManager.Instance.experienceToNextLevel;
+        SetExperienceValue(percent);
+    }
+
+        private void OnLevelUp(int newLevel)
+    {
+        Debug.Log($"[EXP BAR] Leveled up to {newLevel}!");
+        SetExperienceValue(0); // Reset bar to empty
     }
 }
