@@ -3,19 +3,19 @@
     <ui:VisualElement name="Root" class="fullscreen-root">
         <ui:VisualElement name="GameUI" class="game-ui-container">
             <ui:VisualElement name="HealthBar" style="flex-grow: 1; position: absolute; height: 72px; width: 347px;">
-                <ui:VisualElement name="HealthBarContainer" class="health-bar-container" style="height: 20px; width: 301px; left: 12px;">
+                <ui:VisualElement name="HealthBarContainer" class="health-bar-container">
                     <ui:VisualElement name="HealthBarFill" class="health-bar-fill" />
                 </ui:VisualElement>
-                <ui:VisualElement name="HeartImg" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/Player/UI/hearth-pixel.png?fileID=21300000&amp;guid=1420bbd02200c93428da75e315f4af34&amp;type=3#hearth-pixel&quot;); width: 100px; height: 100px; background-position-y: center 10px; background-position-x: center 10px; -unity-background-scale-mode: scale-to-fit; transform-origin: left top; position: absolute; top: -12px; left: -22px;" />
+                <ui:VisualElement name="HeartImg" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/Player/UI/hearth-pixel.png?fileID=21300000&amp;guid=1420bbd02200c93428da75e315f4af34&amp;type=3#hearth-pixel&quot;); width: 120px; height: 120px; background-position-y: center 10px; background-position-x: center 10px; -unity-background-scale-mode: scale-to-fit; transform-origin: left top; position: absolute; top: -22px; left: -21px;" />
             </ui:VisualElement>
             <ui:VisualElement name="ExperienceBar" style="flex-grow: 1; position: absolute; height: 72px; width: 347px; top: 58px; left: auto;">
-                <ui:VisualElement name="ExpBarContainer" class="exp-bar-container" style="height: 20px; width: 301px; left: 12px;">
+                <ui:VisualElement name="ExpBarContainer" class="exp-bar-container">
                     <ui:VisualElement name="ExpBarFill" class="exp-bar-fill" style="background-color: rgb(236, 211, 66);" />
                 </ui:VisualElement>
-                <ui:VisualElement name="ExpImg" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/MainMenu/UIAssets.png?fileID=1297496301&amp;guid=7b49c750f1e15324dba64e0243b35c3a&amp;type=3#UIAssets_50&quot;); width: 55px; height: 69px; background-position-y: center 10px; background-position-x: center 10px; -unity-background-scale-mode: scale-to-fit; transform-origin: left top; position: absolute; top: -2px; left: 1px;" />
+                <ui:VisualElement name="ExpImg" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/MainMenu/UIAssets.png?fileID=1297496301&amp;guid=7b49c750f1e15324dba64e0243b35c3a&amp;type=3#UIAssets_50&quot;); width: 65px; height: 65px; background-position-y: center 10px; background-position-x: center 10px; -unity-background-scale-mode: scale-to-fit; transform-origin: left top; position: absolute; top: 9px; left: 7px;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="MainMenu" class="main-menu-container">
+        <ui:VisualElement name="MainMenu" class="main-menu-container" style="height: 80%;">
             <ui:Label text="VIA Survivors" name="Title" double-click-selects-word="true" class="title-label" style="height: 99px; width: 655px; color: rgb(50, 213, 250); -unity-font-style: bold; font-size: 86px;" />
             <ui:Label text="Main Menu" name="MainMenu" class="title-label" style="height: 67px; width: 358px;" />
             <ui:Button name="play-button" text="Play" class="menu-button" />

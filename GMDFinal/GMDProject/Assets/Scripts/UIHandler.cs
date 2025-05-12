@@ -114,6 +114,8 @@ public class UIHandler : MonoBehaviour
 
     private void OnExperienceChanged(int currentXP)
     {
+        Debug.Log($"[UIHandler] Experience changed: {currentXP} XP");
+
         float percent = currentXP / (float)ExperienceManager.Instance.experienceToNextLevel;
         SetExperienceValue(percent);
     }
@@ -121,6 +123,6 @@ public class UIHandler : MonoBehaviour
         private void OnLevelUp(int newLevel)
     {
         Debug.Log($"[EXP BAR] Leveled up to {newLevel}!");
-        SetExperienceValue(0); // Reset bar to empty
+        SetExperienceValue(0);
     }
 }
