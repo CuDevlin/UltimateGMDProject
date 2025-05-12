@@ -1,7 +1,33 @@
-<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:VisualElement name="HealthBarBackground" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Art/Player/UI/UIHealthFrameDucko.png?fileID=21300000&amp;guid=64db56407333fdc42979ea9bd17df346&amp;type=3#UIHealthFrameDucko&quot;); width: 20%; height: 20%; -unity-background-scale-mode: scale-to-fit;">
-        <engine:VisualElement name="HealthBarContainer" style="flex-grow: 1; position: absolute; height: 55px; width: 211px; top: 76px; left: 157px;">
-            <engine:VisualElement name="HealthBar" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/Player/UI/UIHealthBarDucko.png?fileID=21300000&amp;guid=cf2e18060a0f0fb4eb12c91fd892a97e&amp;type=3#UIHealthBarDucko&quot;); height: 33px; width: 211px;" />
-        </engine:VisualElement>
-    </engine:VisualElement>
-</engine:UXML>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=012f13c49cf288446bf6bc6c033123e3&amp;type=3#MainMenuStyle" />
+    <ui:VisualElement name="Root" class="fullscreen-root" style="background-color: transparent;">
+        <ui:VisualElement name="GameUI" class="game-ui-container">
+            <ui:VisualElement name="HealthBar" style="flex-grow: 1; position: absolute; height: 68px; width: 554px;">
+                <ui:VisualElement name="HealthBarContainer" class="health-bar-container">
+                    <ui:VisualElement name="HealthBarFill" class="health-bar-fill" />
+                </ui:VisualElement>
+                <ui:VisualElement name="HeartImg" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/Player/UI/hearth-pixel.png?fileID=21300000&amp;guid=1420bbd02200c93428da75e315f4af34&amp;type=3#hearth-pixel&quot;); width: 120px; height: 120px; background-position-y: center 10px; background-position-x: center 10px; -unity-background-scale-mode: scale-to-fit; transform-origin: left top; position: absolute; top: -22px; left: -21px;" />
+                <ui:Label name="HealthLabel" style="position: relative; top: 15px; left: 230px; height: 29px; width: 145px; font-size: 20px; -unity-font-style: bold;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ExperienceBar" style="flex-grow: 1; position: absolute; height: 72px; width: 555px; top: 58px;">
+                <ui:VisualElement name="ExpBarContainer" class="exp-bar-container">
+                    <ui:VisualElement name="ExpBarFill" class="exp-bar-fill" style="background-color: rgb(236, 211, 66);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="ExpImg" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/MainMenu/UIAssets.png?fileID=1297496301&amp;guid=7b49c750f1e15324dba64e0243b35c3a&amp;type=3#UIAssets_50&quot;); width: 65px; height: 65px; background-position-y: center 10px; background-position-x: center 10px; -unity-background-scale-mode: scale-to-fit; transform-origin: left top; position: absolute; top: 9px; left: 7px;" />
+                <ui:Label name="LevelLabel" style="position: relative; top: 20px; left: 257px; height: 34px; width: 103px; -unity-font-style: bold; font-size: 20px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="MainMenu" class="main-menu-container" style="height: 80%;">
+            <ui:Label text="VIA Survivors" name="Title" class="title-label" style="height: 99px; width: 655px; color: rgb(50, 213, 250); -unity-font-style: bold; font-size: 86px;" />
+            <ui:Label text="Main Menu" name="MainMenuTitle" class="title-label" style="height: 67px; width: 358px;" />
+            <ui:Button name="play-button" text="Play" class="menu-button" style="-unity-font-style: bold; font-size: 26px;" />
+            <ui:Button name="settings-button" text="Settings" class="menu-button" style="font-size: 26px; -unity-font-style: bold;" />
+            <ui:Button name="quit-button" text="Quit" class="menu-button" style="font-size: 26px; -unity-font-style: bold;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="DeathPopup">
+            <ui:Label name="DeathMessage" text="You Died!" style="unity-font-style: bold; font-size: 48px; color: rgb(152, 0, 0); text-align: center; -unity-font-style: bold; height: 72px; width: 299px; -unity-text-align: upper-center;" />
+            <ui:Button name="restart-button" text="MainMenu" class="menu-button" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 26px;" />
+            <ui:Button name="death-quit-button" text="Quit" class="menu-button" style="font-size: 26px; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

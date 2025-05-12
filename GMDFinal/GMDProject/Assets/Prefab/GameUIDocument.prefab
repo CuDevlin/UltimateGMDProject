@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4113287295053769268}
   - component: {fileID: 3999296316341187092}
-  - component: {fileID: 7828828043446521098}
+  - component: {fileID: 7614941755708302443}
   m_Layer: 5
-  m_Name: UIDocument
+  m_Name: GameUIDocument
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
---- !u!114 &7828828043446521098
+--- !u!114 &7614941755708302443
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,3 +64,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6199c741c9b3141be26fdeafb69bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: -3001216932255314109, guid: 50f6c423499da694994e5e12fec8c17c, type: 3}
+  enemySpawner: {fileID: 1359214526024228621, guid: 326ac3d54decedd42bb1e9391cb1d6e8, type: 3}
