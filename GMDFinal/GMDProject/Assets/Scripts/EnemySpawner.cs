@@ -13,6 +13,8 @@ public class EnemySpawner : MonoBehaviour
     private List<GameObject> activeEnemies = new List<GameObject>();
     private float spawnTimer;
 
+    private bool spawningEnabled = false; // New flag to control spawning
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -20,6 +22,9 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
+        if (!spawningEnabled || player == null)
+            return;
+
         spawnTimer += Time.deltaTime;
 
         if (spawnTimer >= spawnInterval && activeEnemies.Count < maxEnemies)
@@ -27,6 +32,11 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemy();
             spawnTimer = 0f;
         }
+    }
+
+    public void SetSpawningEnabled(bool enable)
+    {
+        spawningEnabled = enable;
     }
 
     private void SpawnEnemy()

@@ -4,7 +4,8 @@ using UnityEngine.UIElements;
 public class UIHandler : MonoBehaviour
 {
     public static UIHandler instance { get; private set; }
-
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private EnemySpawner enemySpawner;
     private VisualElement m_Root;
     private VisualElement m_MainMenu;
     private VisualElement m_GameUI;
@@ -57,9 +58,15 @@ public class UIHandler : MonoBehaviour
             ExperienceManager.Instance.OnExperienceChanged += OnExperienceChanged;
             ExperienceManager.Instance.OnLevelUp += OnLevelUp;
 
-            // Sync initial EXP
             OnExperienceChanged(ExperienceManager.Instance.currentExperience);
         }
+
+        if (playerController != null)
+            playerController.EnableControls(false);
+
+        if (enemySpawner != null)
+            enemySpawner.SetSpawningEnabled(false);
+
     }
 
     private void OnPlayClicked()
@@ -68,6 +75,12 @@ public class UIHandler : MonoBehaviour
         m_GameUI.style.display = DisplayStyle.Flex;
 
         SetHealthValue(1.0f);
+
+        if (playerController != null)
+            playerController.EnableControls(true);
+
+        if (enemySpawner != null)
+            enemySpawner.SetSpawningEnabled(true);
     }
 
     private void OnQuitClicked()
@@ -114,15 +127,12 @@ public class UIHandler : MonoBehaviour
 
     private void OnExperienceChanged(int currentXP)
     {
-        Debug.Log($"[UIHandler] Experience changed: {currentXP} XP");
-
         float percent = currentXP / (float)ExperienceManager.Instance.experienceToNextLevel;
         SetExperienceValue(percent);
     }
 
         private void OnLevelUp(int newLevel)
     {
-        Debug.Log($"[EXP BAR] Leveled up to {newLevel}!");
         SetExperienceValue(0);
     }
 }
