@@ -15,14 +15,23 @@ public class EnemySpawner : MonoBehaviour
 
     private bool spawningEnabled = false; // New flag to control spawning
 
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
-
     private void Update()
     {
-        if (!spawningEnabled || player == null)
+        // Try to find the player if it's not yet assigned
+        if (player == null)
+        {
+            GameObject foundPlayer = GameObject.FindGameObjectWithTag("Player");
+            if (foundPlayer != null)
+            {
+                player = foundPlayer.transform;
+            }
+            else
+            {
+                return; // Still no player, skip this frame
+            }
+        }
+
+        if (!spawningEnabled)
             return;
 
         spawnTimer += Time.deltaTime;
@@ -75,5 +84,18 @@ public class EnemySpawner : MonoBehaviour
         {
             activeEnemies.Remove(enemy);
         }
+    }
+
+    public void ClearEnemies()
+    {
+        // Destroy all enemies in the active list
+        foreach (GameObject enemy in activeEnemies)
+        {
+            if (enemy != null)
+            {
+                Destroy(enemy);
+            }
+        }
+        activeEnemies.Clear();  // Clear the active enemies list
     }
 }

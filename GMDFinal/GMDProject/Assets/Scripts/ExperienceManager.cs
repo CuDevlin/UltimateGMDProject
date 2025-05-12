@@ -45,4 +45,12 @@ public class ExperienceManager : MonoBehaviour
         experienceToNextLevel = Mathf.RoundToInt(experienceToNextLevel * experienceGrowthRate);
         OnLevelUp?.Invoke(currentLevel);
     }
+
+    public void ResetExperience()
+    {
+        currentExperience = 0;
+        currentLevel = 1;
+        OnExperienceChanged?.Invoke(currentExperience);
+        OnLevelUp?.Invoke(currentLevel);
+    }
 }

@@ -66,6 +66,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
         if (isPlayer)
         {
             Debug.Log("Player died");
+            UIHandler.instance?.ShowDeathPopup();
         }
 
         Destroy(gameObject);

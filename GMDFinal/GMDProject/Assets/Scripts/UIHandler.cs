@@ -23,6 +23,10 @@ public class UIHandler : MonoBehaviour
     private Label m_LevelLabel;
     private Label m_HealthLabel;
 
+    private VisualElement m_DeathPopup;
+    private Button m_DeathRestartButton;
+    private Button m_DeathQuitButton;
+
     private void Awake()
     {
         instance = this;
@@ -51,8 +55,15 @@ public class UIHandler : MonoBehaviour
         m_LevelLabel = m_Root.Q<Label>("LevelLabel");
         m_HealthLabel = m_Root.Q<Label>("HealthLabel");
 
+        m_DeathPopup = m_Root.Q<VisualElement>("DeathPopup");
+        m_DeathRestartButton = m_DeathPopup.Q<Button>("restart-button");
+        m_DeathQuitButton = m_DeathPopup.Q<Button>("death-quit-button");
+
         m_PlayButton.clicked += OnPlayClicked;
         m_QuitButton.clicked += OnQuitClicked;
+        m_DeathRestartButton.clicked += OnRestartClicked;
+        m_DeathQuitButton.clicked += OnQuitClicked;
+
         m_PlayButton.Focus();
     }
 
@@ -73,6 +84,29 @@ public class UIHandler : MonoBehaviour
         if (enemySpawner != null)
             enemySpawner.SetSpawningEnabled(false);
 
+        if (m_DeathPopup != null)
+        {
+            m_DeathPopup.style.display = DisplayStyle.None;  // ✅ Ensures it's hidden
+        }
+    }
+
+    public void ShowMainMenu()
+    {
+        m_GameUI.style.display = DisplayStyle.None;
+        m_DeathPopup.style.display = DisplayStyle.None;
+        m_MainMenu.style.display = DisplayStyle.Flex;
+
+        if (playerController != null)
+            playerController.EnableControls(false);
+
+        if (enemySpawner != null)
+            enemySpawner.SetSpawningEnabled(false);
+
+        if (UIHandler.instance != null)
+        {
+            UIHandler.instance.SetExperienceValue(0f);  // Reset experience bar to 0%
+            UIHandler.instance.SetPlayerLevel(1);      // Reset level label to 1
+        }
     }
 
     private void OnPlayClicked()
@@ -80,13 +114,9 @@ public class UIHandler : MonoBehaviour
         m_MainMenu.style.display = DisplayStyle.None;
         m_GameUI.style.display = DisplayStyle.Flex;
 
-        SetHealthValue(1.0f);
+        SetHealthValue(1.0f);  // Initialize health bar to full (100%)
 
-        if (playerController != null)
-            playerController.EnableControls(true);
-
-        if (enemySpawner != null)
-            enemySpawner.SetSpawningEnabled(true);
+        GameManager.Instance.StartGame();
     }
 
     private void OnQuitClicked()
@@ -97,6 +127,7 @@ public class UIHandler : MonoBehaviour
 #endif
     }
 
+    // Set Health Bar Value
     public void SetHealthValue(float percentage)
     {
         if (m_HealthBarFill != null && m_HealthBarContainer != null)
@@ -110,6 +141,7 @@ public class UIHandler : MonoBehaviour
         }
     }
 
+    // Set Experience Bar Value
     public void SetExperienceValue(float percentage)
     {
         Debug.Log($"[EXP BAR] Setting experience bar to: {percentage * 100}%");
@@ -125,24 +157,37 @@ public class UIHandler : MonoBehaviour
         }
     }
 
+    // Update Max Health Bar width
     public void UpdateMaxHealth(int newMaxHealth)
     {
         maxHealthBarWidth = Mathf.Max(newMaxHealth * 20, 300f);
         m_HealthBarContainer.style.width = maxHealthBarWidth;
     }
 
+    // Update Health Text
+    public void SetHealthText(int current, int max)
+    {
+        if (m_HealthLabel != null)
+        {
+            m_HealthLabel.text = $"Health: {current} / {max}";
+        }
+    }
+
+    // Handle Experience Change
     private void OnExperienceChanged(int currentXP)
     {
         float percent = currentXP / (float)ExperienceManager.Instance.experienceToNextLevel;
         SetExperienceValue(percent);
     }
 
-        private void OnLevelUp(int newLevel)
+    // Handle Level Up
+    private void OnLevelUp(int newLevel)
     {
-        SetExperienceValue(0);
-        SetPlayerLevel(newLevel);
+        SetExperienceValue(0);  // Reset experience bar on level-up
+        SetPlayerLevel(newLevel);  // Update the level label
     }
 
+    // Set Player Level Label
     public void SetPlayerLevel(int level)
     {
         if (m_LevelLabel != null)
@@ -151,11 +196,27 @@ public class UIHandler : MonoBehaviour
         }
     }
 
-    public void SetHealthText(int current, int max)
+    // Show Death Popup
+    public void ShowDeathPopup()
     {
-        if (m_HealthLabel != null)
+        if (m_DeathPopup != null)
         {
-            m_HealthLabel.text = $"Health: {current} / {max}";
+            m_DeathPopup.style.display = DisplayStyle.Flex; // Show death popup
         }
+    }
+
+    // Hide Death Popup (called when restarting the game)
+    public void HideDeathPopup()
+    {
+        if (m_DeathPopup != null)
+        {
+            m_DeathPopup.style.display = DisplayStyle.None; // Hide death popup
+        }
+    }
+
+    // Restart the game (reset to main menu)
+    private void OnRestartClicked()
+    {
+        GameManager.Instance.ResetGame();
     }
 }

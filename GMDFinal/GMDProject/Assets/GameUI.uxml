@@ -1,6 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=012f13c49cf288446bf6bc6c033123e3&amp;type=3#MainMenuStyle" />
+
     <ui:VisualElement name="Root" class="fullscreen-root">
+
         <ui:VisualElement name="GameUI" class="game-ui-container">
             <ui:VisualElement name="HealthBar" style="flex-grow: 1; position: absolute; height: 68px; width: 554px;">
                 <ui:VisualElement name="HealthBarContainer" class="health-bar-container">
@@ -9,7 +11,8 @@
                 <ui:VisualElement name="HeartImg" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/Player/UI/hearth-pixel.png?fileID=21300000&amp;guid=1420bbd02200c93428da75e315f4af34&amp;type=3#hearth-pixel&quot;); width: 120px; height: 120px; background-position-y: center 10px; background-position-x: center 10px; -unity-background-scale-mode: scale-to-fit; transform-origin: left top; position: absolute; top: -22px; left: -21px;" />
                 <ui:Label name="HealthLabel" style="position: relative; top: 15px; left: 230px; height: 29px; width: 145px; font-size: 20px; -unity-font-style: bold;" />
             </ui:VisualElement>
-            <ui:VisualElement name="ExperienceBar" style="flex-grow: 1; position: absolute; height: 72px; width: 555px; top: 58px; left: auto;">
+
+            <ui:VisualElement name="ExperienceBar" style="flex-grow: 1; position: absolute; height: 72px; width: 555px; top: 58px;">
                 <ui:VisualElement name="ExpBarContainer" class="exp-bar-container">
                     <ui:VisualElement name="ExpBarFill" class="exp-bar-fill" style="background-color: rgb(236, 211, 66);" />
                 </ui:VisualElement>
@@ -17,12 +20,22 @@
                 <ui:Label name="LevelLabel" style="position: relative; top: 20px; left: 257px; height: 34px; width: 103px; -unity-font-style: bold; font-size: 20px;" />
             </ui:VisualElement>
         </ui:VisualElement>
+
         <ui:VisualElement name="MainMenu" class="main-menu-container" style="height: 80%;">
-            <ui:Label text="VIA Survivors" name="Title" double-click-selects-word="true" class="title-label" style="height: 99px; width: 655px; color: rgb(50, 213, 250); -unity-font-style: bold; font-size: 86px;" />
-            <ui:Label text="Main Menu" name="MainMenu" class="title-label" style="height: 67px; width: 358px;" />
+            <ui:Label text="VIA Survivors" name="Title" class="title-label" style="height: 99px; width: 655px; color: rgb(50, 213, 250); -unity-font-style: bold; font-size: 86px;" />
+            <ui:Label text="Main Menu" name="MainMenuTitle" class="title-label" style="height: 67px; width: 358px;" />
             <ui:Button name="play-button" text="Play" class="menu-button" />
             <ui:Button name="settings-button" text="Settings" class="menu-button" />
             <ui:Button name="quit-button" text="Quit" class="menu-button" />
         </ui:VisualElement>
+
+        <!-- Fix: all elements must use ui: namespace -->
+        <!-- Fix: unique button names (renamed quit-button to death-quit-button) -->
+        <ui:VisualElement name="DeathPopup" style="display: none; position: absolute; top: 40%; left: 40%; width: 200px; height: 150px; background-color: #000000cc; padding: 10px; border-radius: 8px;">
+            <ui:Label name="DeathMessage" text="You Died!" style="unity-font-style: bold; font-size: 24px; color: white; text-align: center;" />
+            <ui:Button name="restart-button" text="MainMenu" class="restart-button" />
+            <ui:Button name="death-quit-button" text="Quit" class="quit-button" />
+        </ui:VisualElement>
+
     </ui:VisualElement>
 </ui:UXML>
