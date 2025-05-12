@@ -20,6 +20,8 @@ public class UIHandler : MonoBehaviour
     private Button m_QuitButton;
 
     private float maxHealthBarWidth = 300f;
+    private Label m_LevelLabel;
+    private Label m_HealthLabel;
 
     private void Awake()
     {
@@ -46,6 +48,9 @@ public class UIHandler : MonoBehaviour
         m_PlayButton = m_MainMenu.Q<Button>("play-button");
         m_QuitButton = m_MainMenu.Q<Button>("quit-button");
 
+        m_LevelLabel = m_Root.Q<Label>("LevelLabel");
+        m_HealthLabel = m_Root.Q<Label>("HealthLabel");
+
         m_PlayButton.clicked += OnPlayClicked;
         m_QuitButton.clicked += OnQuitClicked;
         m_PlayButton.Focus();
@@ -58,6 +63,7 @@ public class UIHandler : MonoBehaviour
             ExperienceManager.Instance.OnExperienceChanged += OnExperienceChanged;
             ExperienceManager.Instance.OnLevelUp += OnLevelUp;
 
+            SetPlayerLevel(ExperienceManager.Instance.currentLevel);
             OnExperienceChanged(ExperienceManager.Instance.currentExperience);
         }
 
@@ -134,5 +140,22 @@ public class UIHandler : MonoBehaviour
         private void OnLevelUp(int newLevel)
     {
         SetExperienceValue(0);
+        SetPlayerLevel(newLevel);
+    }
+
+    public void SetPlayerLevel(int level)
+    {
+        if (m_LevelLabel != null)
+        {
+            m_LevelLabel.text = $"Level: {level}";
+        }
+    }
+
+    public void SetHealthText(int current, int max)
+    {
+        if (m_HealthLabel != null)
+        {
+            m_HealthLabel.text = $"Health: {current} / {max}";
+        }
     }
 }

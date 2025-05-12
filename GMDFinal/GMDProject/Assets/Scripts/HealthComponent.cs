@@ -17,6 +17,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
         if (isPlayer)
         {
             UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth);
+            UIHandler.instance?.SetHealthText(currentHealth, maxHealth);
         }
     }
 
@@ -44,6 +45,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
         if (isPlayer)
         {
             UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth); // Update health bar
+            UIHandler.instance?.SetHealthText(currentHealth, maxHealth);
         }
 
         if (currentHealth <= 0)
@@ -83,6 +85,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
         if (isPlayer)
         {
             UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth);
+            UIHandler.instance?.SetHealthText(currentHealth, maxHealth);
         }
 
         Debug.Log($"Level Up! New Max Health: {maxHealth}");

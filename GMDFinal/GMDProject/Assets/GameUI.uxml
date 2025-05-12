@@ -2,17 +2,19 @@
     <Style src="project://database/Assets/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=012f13c49cf288446bf6bc6c033123e3&amp;type=3#MainMenuStyle" />
     <ui:VisualElement name="Root" class="fullscreen-root">
         <ui:VisualElement name="GameUI" class="game-ui-container">
-            <ui:VisualElement name="HealthBar" style="flex-grow: 1; position: absolute; height: 72px; width: 347px;">
+            <ui:VisualElement name="HealthBar" style="flex-grow: 1; position: absolute; height: 68px; width: 554px;">
                 <ui:VisualElement name="HealthBarContainer" class="health-bar-container">
                     <ui:VisualElement name="HealthBarFill" class="health-bar-fill" />
                 </ui:VisualElement>
                 <ui:VisualElement name="HeartImg" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/Player/UI/hearth-pixel.png?fileID=21300000&amp;guid=1420bbd02200c93428da75e315f4af34&amp;type=3#hearth-pixel&quot;); width: 120px; height: 120px; background-position-y: center 10px; background-position-x: center 10px; -unity-background-scale-mode: scale-to-fit; transform-origin: left top; position: absolute; top: -22px; left: -21px;" />
+                <ui:Label name="HealthLabel" style="position: relative; top: 15px; left: 230px; height: 29px; width: 145px; font-size: 20px; -unity-font-style: bold;" />
             </ui:VisualElement>
-            <ui:VisualElement name="ExperienceBar" style="flex-grow: 1; position: absolute; height: 72px; width: 347px; top: 58px; left: auto;">
+            <ui:VisualElement name="ExperienceBar" style="flex-grow: 1; position: absolute; height: 72px; width: 555px; top: 58px; left: auto;">
                 <ui:VisualElement name="ExpBarContainer" class="exp-bar-container">
                     <ui:VisualElement name="ExpBarFill" class="exp-bar-fill" style="background-color: rgb(236, 211, 66);" />
                 </ui:VisualElement>
                 <ui:VisualElement name="ExpImg" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/MainMenu/UIAssets.png?fileID=1297496301&amp;guid=7b49c750f1e15324dba64e0243b35c3a&amp;type=3#UIAssets_50&quot;); width: 65px; height: 65px; background-position-y: center 10px; background-position-x: center 10px; -unity-background-scale-mode: scale-to-fit; transform-origin: left top; position: absolute; top: 9px; left: 7px;" />
+                <ui:Label name="LevelLabel" style="position: relative; top: 20px; left: 257px; height: 34px; width: 103px; -unity-font-style: bold; font-size: 20px;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="MainMenu" class="main-menu-container" style="height: 80%;">
