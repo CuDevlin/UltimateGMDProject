@@ -4,8 +4,10 @@ using UnityEngine.UIElements;
 public class UIHandler : MonoBehaviour
 {
     public static UIHandler instance { get; private set; }
+
     [SerializeField] private PlayerController playerController;
     [SerializeField] private EnemySpawner enemySpawner;
+
     private VisualElement m_Root;
     private VisualElement m_MainMenu;
     private VisualElement m_GameUI;
@@ -26,6 +28,13 @@ public class UIHandler : MonoBehaviour
     private VisualElement m_DeathPopup;
     private Button m_DeathRestartButton;
     private Button m_DeathQuitButton;
+
+    private VisualElement m_PauseMenu;
+    private Button m_ContinueButton;
+    private Button m_PauseMainMenuButton;
+    private Button m_PauseQuitButton;
+
+    private bool isPaused = false;
 
     private void Awake()
     {
@@ -59,14 +68,26 @@ public class UIHandler : MonoBehaviour
         m_DeathRestartButton = m_DeathPopup.Q<Button>("restart-button");
         m_DeathQuitButton = m_DeathPopup.Q<Button>("death-quit-button");
 
-        // Set the GameUI to be hidden initially.
+        // Pause menu elements
+        m_PauseMenu = m_Root.Q<VisualElement>("PauseMenu");
+        m_ContinueButton = m_PauseMenu.Q<Button>("continue-button");
+        m_PauseMainMenuButton = m_PauseMenu.Q<Button>("pause-mainmenu-button");
+        m_PauseQuitButton = m_PauseMenu.Q<Button>("pause-quit-button");
+
+        // Set the GameUI, PauseMenu, and DeathPopup to be hidden initially.
         m_GameUI.style.display = DisplayStyle.None;
+        m_DeathPopup.style.display = DisplayStyle.None;
+        m_PauseMenu.style.display = DisplayStyle.None;
 
         // Assign button click events
         m_PlayButton.clicked += OnPlayClicked;
         m_QuitButton.clicked += OnQuitClicked;
         m_DeathRestartButton.clicked += OnRestartClicked;
         m_DeathQuitButton.clicked += OnQuitClicked;
+
+        m_ContinueButton.clicked += ResumeGame;
+        m_PauseMainMenuButton.clicked += ReturnToMainMenu;
+        m_PauseQuitButton.clicked += OnQuitClicked;
 
         m_PlayButton.Focus();
     }
@@ -87,18 +108,26 @@ public class UIHandler : MonoBehaviour
 
         if (enemySpawner != null)
             enemySpawner.SetSpawningEnabled(false);
+    }
 
-        if (m_DeathPopup != null)
+    private void Update()
+    {
+        // Toggle pause menu with Escape key
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            m_DeathPopup.style.display = DisplayStyle.None;  // ✅ Ensures it's hidden
+            if (isPaused)
+                ResumeGame();
+            else if (m_GameUI.style.display == DisplayStyle.Flex)
+                PauseGame();
         }
     }
 
     public void ShowMainMenu()
     {
-        // Hide the GameUI and DeathPopup, show MainMenu
+        // Hide the GameUI, PauseMenu, and DeathPopup, show MainMenu
         m_GameUI.style.display = DisplayStyle.None;
         m_DeathPopup.style.display = DisplayStyle.None;
+        m_PauseMenu.style.display = DisplayStyle.None;
         m_MainMenu.style.display = DisplayStyle.Flex;
 
         // Set the background color of the root to black when in main menu
@@ -148,6 +177,39 @@ public class UIHandler : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+    }
+
+    // Pause the game
+    public void PauseGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0f;
+        m_PauseMenu.style.display = DisplayStyle.Flex;
+
+        if (playerController != null)
+            playerController.EnableControls(false);
+    }
+
+    // Resume the game from pause
+    public void ResumeGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1f;
+        m_PauseMenu.style.display = DisplayStyle.None;
+
+        if (playerController != null)
+            playerController.EnableControls(true);
+    }
+
+    // Return to main menu from pause
+    private void ReturnToMainMenu()
+    {
+        ResumeGame(); // Ensure time resumes
+
+        // Reset game state fully
+        GameManager.Instance.ResetGame();
+
+        ShowMainMenu();
     }
 
     // Set Health Bar Value
@@ -240,6 +302,8 @@ public class UIHandler : MonoBehaviour
     // Restart the game (reset to main menu)
     private void OnRestartClicked()
     {
+        Time.timeScale = 1f;
+        isPaused = false;
         GameManager.Instance.ResetGame();
     }
 }
