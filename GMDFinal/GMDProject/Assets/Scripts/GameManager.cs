@@ -73,6 +73,12 @@ public class GameManager : MonoBehaviour
             Destroy(currentPlayer);
         }
 
+        var projectiles = GameObject.FindGameObjectsWithTag("Projectile");
+        foreach (var proj in projectiles)
+        {
+            Destroy(proj);
+        }
+
         // Clear enemies
         EnemySpawner spawner = FindFirstObjectByType<EnemySpawner>();
         if (spawner != null)

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -6375962981695209485}
   m_Layer: 9
   m_Name: Arrow_1
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,3 +191,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
+  damageMultiplier: 1
