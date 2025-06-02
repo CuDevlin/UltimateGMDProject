@@ -24,6 +24,12 @@
             <ui:Button name="settings-button" text="Settings" class="menu-button" style="font-size: 26px; -unity-font-style: bold;" />
             <ui:Button name="quit-button" text="Quit" class="menu-button" style="font-size: 26px; -unity-font-style: bold;" />
         </ui:VisualElement>
+        <ui:VisualElement name="PauseMenu" class="main-menu-container" style="display: none; background-color: rgba(0, 0, 0, 0.6);">
+            <ui:Label text="Paused" class="title-label" style="font-size: 64px;" />
+            <ui:Button name="continue-button" text="Continue" class="menu-button" />
+            <ui:Button name="pause-mainmenu-button" text="Main Menu" class="menu-button" />
+            <ui:Button name="pause-quit-button" text="Quit" class="menu-button" />
+        </ui:VisualElement>
         <ui:VisualElement name="DeathPopup">
             <ui:Label name="DeathMessage" text="You Died!" style="unity-font-style: bold; font-size: 48px; color: rgb(152, 0, 0); text-align: center; -unity-font-style: bold; height: 72px; width: 299px; -unity-text-align: upper-center;" />
             <ui:Button name="restart-button" text="MainMenu" class="menu-button" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 26px;" />
