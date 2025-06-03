@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     public float speed = 3f;
+    private Animator animator;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         shooter = GetComponent<ProjectileShooter>();
         controls = new InputSystem_Actions();
+        animator = GetComponent<Animator>();
     }
 
     void OnEnable()
@@ -102,11 +104,31 @@ public class PlayerController : MonoBehaviour
         shooter.TryFire(shootDirection);
     }
 
+    private void AnimateMovement()
+    {
+        float moveMagnitude = moveInput.magnitude;
+
+        // Movement direction
+        animator.SetFloat("MoveX", moveInput.x);
+        animator.SetFloat("MoveY", moveInput.y);
+        animator.SetFloat("MoveMagnitude", moveMagnitude);
+
+        if (moveMagnitude > 0.1f)
+        {
+            animator.SetFloat("LastMoveX", moveInput.x);
+            animator.SetFloat("LastMoveY", moveInput.y);
+        }
+    }
+
     void FixedUpdate()
     {
         if (!controlsEnabled) return;
 
+        // Move character
         Vector2 newPosition = rb.position + moveInput * speed * Time.fixedDeltaTime;
         rb.MovePosition(newPosition);
+
+        // Animate
+        AnimateMovement();
     }
 }

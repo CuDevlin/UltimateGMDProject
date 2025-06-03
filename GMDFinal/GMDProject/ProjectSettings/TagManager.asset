@@ -4,6 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Enemy
+  - Effects_All
+  - Effects_Player
   - Projectile
   layers:
   - Default
@@ -13,12 +16,12 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Blocks-Player
   - Character
   - Projectiles
-  - 
-  - 
-  - 
+  - Enemy
+  - Blocks-All
+  - Ground
   - 
   - 
   - 
@@ -41,6 +44,24 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1115793023
+    locked: 0
+  - name: Water
+    uniqueID: 1896632091
+    locked: 0
+  - name: Decorations
+    uniqueID: 2885585425
+    locked: 0
+  - name: Characters
+    uniqueID: 440076949
+    locked: 0
+  - name: Collidable
+    uniqueID: 1207270527
+    locked: 0
+  - name: UI
+    uniqueID: 2407011343
     locked: 0
   m_RenderingLayers:
   - Default
