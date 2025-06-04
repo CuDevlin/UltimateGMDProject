@@ -4,8 +4,13 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")]
-    public float speed = 3f;
+    [Header("Movement Base Settings")]
+    public float baseSpeed = 3f;
+    public float speedUpgradeStep = 0.5f;
+    public int maxSpeedLevel = 5;
+    private int speedLevel = 0;
+
+    [Header("Animation")]
     private Animator animator;
 
     private Vector2 moveInput;
@@ -25,6 +30,12 @@ public class PlayerController : MonoBehaviour
         shooter = GetComponent<ProjectileShooter>();
         controls = new InputSystem_Actions();
         animator = GetComponent<Animator>();
+    }
+
+    void Start()
+    {
+        PowerUpManager powerUpManager = FindFirstObjectByType<PowerUpManager>();
+        powerUpManager?.RegisterPlayer(this.gameObject);
     }
 
     void OnEnable()
@@ -108,7 +119,6 @@ public class PlayerController : MonoBehaviour
     {
         float moveMagnitude = moveInput.magnitude;
 
-        // Movement direction
         animator.SetFloat("MoveX", moveInput.x);
         animator.SetFloat("MoveY", moveInput.y);
         animator.SetFloat("MoveMagnitude", moveMagnitude);
@@ -124,11 +134,20 @@ public class PlayerController : MonoBehaviour
     {
         if (!controlsEnabled) return;
 
-        // Move character
-        Vector2 newPosition = rb.position + moveInput * speed * Time.fixedDeltaTime;
+        Vector2 newPosition = rb.position + moveInput * GetCurrentSpeed() * Time.fixedDeltaTime;
         rb.MovePosition(newPosition);
 
-        // Animate
         AnimateMovement();
+    }
+
+    private float GetCurrentSpeed()
+    {
+        return baseSpeed + speedLevel * speedUpgradeStep;
+    }
+
+    public void IncreaseSpeedLevel()
+    {
+        speedLevel = Mathf.Min(speedLevel + 1, maxSpeedLevel);
+        Debug.Log($"Speed level increased to {speedLevel}, current speed: {GetCurrentSpeed():0.00}");
     }
 }
