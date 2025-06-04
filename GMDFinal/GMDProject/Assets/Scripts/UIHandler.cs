@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.InputSystem; // NEW: Required for Input System
 
 public class UIHandler : MonoBehaviour
 {
@@ -35,6 +36,9 @@ public class UIHandler : MonoBehaviour
     private Button m_PauseQuitButton;
 
     private bool isPaused = false;
+
+    // NEW: Input system reference
+    private InputSystem_Actions inputActions;
 
     private void Awake()
     {
@@ -90,6 +94,25 @@ public class UIHandler : MonoBehaviour
         m_PauseQuitButton.clicked += OnQuitClicked;
 
         m_PlayButton.Focus();
+
+        // NEW: Setup input actions and bind Pause input
+        inputActions = new InputSystem_Actions();
+        inputActions.UI.Pause.performed += ctx => HandlePauseInput();
+    }
+
+    private void OnEnable()
+    {
+        // NEW: Enable input map
+        if (inputActions == null)
+            inputActions = new InputSystem_Actions();
+
+        inputActions.UI.Enable();
+    }
+
+    private void OnDisable()
+    {
+        // NEW: Disable input map
+        inputActions.UI.Disable();
     }
 
     private void Start()
@@ -110,16 +133,13 @@ public class UIHandler : MonoBehaviour
             enemySpawner.SetSpawningEnabled(false);
     }
 
-    private void Update()
+    // NEW: Replace Update with this Input System event method
+    private void HandlePauseInput()
     {
-        // Toggle pause menu with Escape key
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isPaused)
-                ResumeGame();
-            else if (m_GameUI.style.display == DisplayStyle.Flex)
-                PauseGame();
-        }
+        if (isPaused)
+            ResumeGame();
+        else if (m_GameUI.style.display == DisplayStyle.Flex)
+            PauseGame();
     }
 
     public void ShowMainMenu()
