@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
 public enum PowerUpType
@@ -38,42 +39,54 @@ public class PowerUpManager : MonoBehaviour
 
     private void HandleLevelUp(int level)
     {
-        ApplyRandomPowerUp();
+        ShowUpgradeChoice();
     }
 
- private void ApplyRandomPowerUp()
-{
-    PowerUpType chosenType = (PowerUpType)UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(PowerUpType)).Length);
-
-    switch (chosenType)
+    private void ShowUpgradeChoice()
     {
-        case PowerUpType.Health:
-            healthComponent?.IncreaseHealthLevel();
-            Debug.Log($"[POWERUP] Health level increased");
-            break;
+        List<PowerUpType> allOptions = new List<PowerUpType>((PowerUpType[])Enum.GetValues(typeof(PowerUpType)));
 
-        case PowerUpType.Damage:
-            damageDealer?.IncreaseDamageLevel();
-            Debug.Log($"[POWERUP] Damage level increased.");
-            break;
+        PowerUpType option1 = allOptions[Random.Range(0, allOptions.Count)];
+        PowerUpType option2;
 
-        case PowerUpType.Speed:
-            playerController?.IncreaseSpeedLevel();
-            Debug.Log($"[POWERUP] Speed level increased.");
-            break;
+        do
+        {
+            option2 = allOptions[Random.Range(0, allOptions.Count)];
+        } while (option2 == option1);
 
-        case PowerUpType.ProjectileCount:
-            projectileShooter?.IncreaseProjectileLevel();
-            Debug.Log($"[POWERUP] Projectile count level increased.");
-            break;
-
-        case PowerUpType.FireRate:
-            projectileShooter?.IncreaseFireRateLevel();
-            Debug.Log($"[POWERUP] Fire rate level increased.");
-            break;
+        UIHandler.instance.ShowUpgradeSelection(option1, option2, ApplyPowerUp);
     }
 
-    Debug.Log($"[POWERUP] Applied {chosenType}");
-    }
+    private void ApplyPowerUp(PowerUpType chosenType)
+    {
+        switch (chosenType)
+        {
+            case PowerUpType.Health:
+                healthComponent?.IncreaseHealthLevel();
+                Debug.Log($"[POWERUP] Health level increased");
+                break;
 
+            case PowerUpType.Damage:
+                damageDealer?.IncreaseDamageLevel();
+                Debug.Log($"[POWERUP] Damage level increased.");
+                break;
+
+            case PowerUpType.Speed:
+                playerController?.IncreaseSpeedLevel();
+                Debug.Log($"[POWERUP] Speed level increased.");
+                break;
+
+            case PowerUpType.ProjectileCount:
+                projectileShooter?.IncreaseProjectileLevel();
+                Debug.Log($"[POWERUP] Projectile count level increased.");
+                break;
+
+            case PowerUpType.FireRate:
+                projectileShooter?.IncreaseFireRateLevel();
+                Debug.Log($"[POWERUP] Fire rate level increased.");
+                break;
+        }
+
+        Debug.Log($"[POWERUP] Applied {chosenType}");
+    }
 }

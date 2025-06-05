@@ -103,3 +103,39 @@
 .menu-button:focus {
     background-image: url("project://database/Assets/Art/MainMenu/UIAssetsButton_2.png?fileID=21300000&guid=0d663bc40da06744aa4d8ec02d543e87&type=3#UIAssetsButton_2");
 }
+
+.upgrade-panel {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    right: 10%;
+    height: 300px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.upgrade-title {
+    font-size: 38px;
+    color: rgb(252, 249, 210);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    margin-bottom: 20px;
+}
+
+.upgrade-button-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.upgrade-button {
+    width: 360px;
+    height: 100px;
+    font-size: 26px;
+}
