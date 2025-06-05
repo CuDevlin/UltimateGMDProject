@@ -6,7 +6,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
     [Header("Health Settings")]
     public int baseMaxHealth = 5;
     public int healthUpgradeStep = 10;
-    public int maxHealthLevel = 5;
+    public int maxHealthLevel = 10;
     public int healthUpgradeOnLevelUp = 1;
 
     private int healthLevel = 0;
