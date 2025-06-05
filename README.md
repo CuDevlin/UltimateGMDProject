@@ -22,3 +22,7 @@ https://github.com/CuDevlin/UltimateGMDProject/blob/blog/GameDevBlogPost3/BlogPo
 https://aamatniekss.itch.io/topdown-fantasy-forest
 https://merchant-shade.itch.io/16x16-puny-characters
 https://franuka.itch.io/rpg-ui-pack-demo
+
+
+### Gameplay Video
+https://youtu.be/Ys96X2W3ik0
