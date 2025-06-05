@@ -7,8 +7,11 @@ public class HealthComponent : MonoBehaviour, IDamageable
     public int baseMaxHealth = 5;
     public int healthUpgradeStep = 10;
     public int maxHealthLevel = 5;
+    public int healthUpgradeOnLevelUp = 1;
 
     private int healthLevel = 0;
+    private int levelBonusHealth = 0;
+
     public int maxHealth;
     private int currentHealth;
 
@@ -17,7 +20,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        maxHealth = baseMaxHealth + healthLevel * healthUpgradeStep;
+        RecalculateMaxHealth();
         currentHealth = maxHealth;
 
         if (isPlayer)
@@ -30,17 +33,13 @@ public class HealthComponent : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         if (isPlayer && ExperienceManager.Instance != null)
-        {
             ExperienceManager.Instance.OnLevelUp += HandleLevelUp;
-        }
     }
 
     private void OnDisable()
     {
         if (isPlayer && ExperienceManager.Instance != null)
-        {
             ExperienceManager.Instance.OnLevelUp -= HandleLevelUp;
-        }
     }
 
     public void TakeDamage(int amount)
@@ -52,12 +51,11 @@ public class HealthComponent : MonoBehaviour, IDamageable
         {
             UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth);
             UIHandler.instance?.SetHealthText(currentHealth, maxHealth);
-            SoundManager.Instance.PlaySFX(SoundManager.Instance.hitPlayerClip);
+            SoundManager.Instance?.PlaySFX(SoundManager.Instance.hitPlayerClip);
         }
-
-        if (!isPlayer)
+        else
         {
-            SoundManager.Instance.PlaySFX(SoundManager.Instance.hitEnemyClip);
+            SoundManager.Instance?.PlaySFX(SoundManager.Instance.hitEnemyClip);
         }
 
         if (currentHealth <= 0)
@@ -68,8 +66,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        EnemyController enemyController = GetComponent<EnemyController>();
-        if (enemyController != null)
+        if (TryGetComponent(out EnemyController enemyController))
         {
             enemyController.DisableMovement();
             enemyController.HandleEnemyDeath();
@@ -86,49 +83,44 @@ public class HealthComponent : MonoBehaviour, IDamageable
 
     private void HandleLevelUp(int newLevel)
     {
-        ApplyLevelUpBonus(newLevel);
-    }
-
-    private void ApplyLevelUpBonus(int level)
-    {
-        IncreaseHealthLevel();
-    }
-
-    public void IncreaseMaxHealth(int flatAmount)
-    {
-        maxHealth += flatAmount;
+        levelBonusHealth += healthUpgradeOnLevelUp;
+        RecalculateMaxHealth();
         currentHealth = maxHealth;
-        OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
         if (isPlayer)
         {
-            UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth);
+            UIHandler.instance?.SetHealthValue(1f);
             UIHandler.instance?.SetHealthText(currentHealth, maxHealth);
         }
 
-        Debug.Log($"Max health increased by {flatAmount}. New max: {maxHealth}");
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        Debug.Log($"[LEVEL-UP] Bonus health increased by {healthUpgradeOnLevelUp}, total bonus: {levelBonusHealth}, maxHealth now: {maxHealth}");
     }
 
     public void IncreaseHealthLevel()
     {
         if (healthLevel >= maxHealthLevel)
         {
-            Debug.Log("[HEALTH] Max health level reached.");
+            Debug.Log("[POWERUP] Max health level reached.");
             return;
         }
 
         healthLevel++;
-        maxHealth = baseMaxHealth + healthLevel * healthUpgradeStep;
+        RecalculateMaxHealth();
         currentHealth = maxHealth;
-
-        OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
         if (isPlayer)
         {
-            UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth);
+            UIHandler.instance?.SetHealthValue(1f);
             UIHandler.instance?.SetHealthText(currentHealth, maxHealth);
         }
 
-        Debug.Log($"[HEALTH] Level increased to {healthLevel}. Max health is now {maxHealth}.");
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        Debug.Log($"[POWERUP] Health level increased to {healthLevel}. Max health now: {maxHealth}");
+    }
+
+    private void RecalculateMaxHealth()
+    {
+        maxHealth = baseMaxHealth + (healthLevel * healthUpgradeStep) + levelBonusHealth;
     }
 }
