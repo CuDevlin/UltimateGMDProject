@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  experienceReward: 10
+  experienceReward: 5
 --- !u!114 &4861237871658194214
 MonoBehaviour:
   m_ObjectHideFlags: 0
