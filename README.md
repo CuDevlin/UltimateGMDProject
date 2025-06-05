@@ -3,26 +3,28 @@
 ### Roll - A - Ball Blog Post
 https://github.com/CuDevlin/UltimateGMDProject/blob/main/BlogPosts/Post1.md
 
-### Game Design Document Blog Post
-https://github.com/CuDevlin/UltimateGMDProject/blob/main/BlogPosts/GameDesignDocument.md
-
-### Game Development Blog Post 1
-https://github.com/CuDevlin/UltimateGMDProject/blob/main/BlogPosts/Post3.md
-
-### Game Development Blog Post 2
-
+### Game Design Document
+https://github.com/CuDevlin/UltimateGMDProject/blob/main/BlogPosts/Post2GDD.md
 
 ### Game Development Blog Post 3
-https://github.com/CuDevlin/UltimateGMDProject/blob/blog/GameDevBlogPost3/BlogPosts/Post5.md
+https://github.com/CuDevlin/UltimateGMDProject/blob/main/BlogPosts/Post3.md
 
-### Gameplay Video
+### Game Development Blog Post 4
+https://github.com/CuDevlin/UltimateGMDProject/blob/main/BlogPosts/Post4.md
 
+### Game Development Blog Post 5
+https://github.com/CuDevlin/UltimateGMDProject/blob/main/BlogPosts/Post5.md
+
+### Game Development Blog Post 6
+TBA
 
 ### Sources
 https://aamatniekss.itch.io/topdown-fantasy-forest
 https://merchant-shade.itch.io/16x16-puny-characters
 https://franuka.itch.io/rpg-ui-pack-demo
-
+https://assetstore.unity.com/packages/audio/ambient/fantasy/jrpg-rpg-combat-exploration-theme-307427
+https://openai.com/sora/
+https://chatgpt.com/
 
 ### Gameplay Video
 https://youtu.be/Ys96X2W3ik0
