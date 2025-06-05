@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 440076949
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: -221445239, guid: 481f9964b69a13543aceee6c4fdb5d34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,8 +130,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.21133333}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.775, y: 1.235}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -176,7 +176,7 @@ Animator:
   m_GameObject: {fileID: 8927966942734658956}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: eb984caded128d746941e9595d4c3b3b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 56530d3624921dd4393f424522b40ffe, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -217,6 +217,7 @@ MonoBehaviour:
   baseMaxHealth: 5
   healthUpgradeStep: 10
   maxHealthLevel: 5
+  healthUpgradeOnLevelUp: 1
   maxHealth: 2
   isPlayer: 0
   OnHealthChanged:
