@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Projectile : MonoBehaviour
 {
-    public float speed = 6f;
+    public float speed = 8f;
     public float maxLifetime = 5f;
 
     private Rigidbody2D rb;
@@ -15,7 +15,6 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        // Automatically destroy after some time
         Destroy(gameObject, maxLifetime);
     }
 
@@ -23,21 +22,18 @@ public class Projectile : MonoBehaviour
     {
         rb.linearVelocity = direction.normalized * speed;
 
-        // Rotate to face direction
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Let DamageDealer handle the actual damage logic
         DamageDealer damageDealer = GetComponent<DamageDealer>();
         if (damageDealer != null)
         {
             damageDealer.TryDealDamage(other);
         }
 
-        // Then destroy self
         Destroy(gameObject);
     }
 }

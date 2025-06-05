@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Base Settings")]
     public float baseSpeed = 3f;
     public float speedUpgradeStep = 0.5f;
-    public int maxSpeedLevel = 5;
+    public int maxSpeedLevel = 10;
     private int speedLevel = 0;
 
     [Header("Animation")]

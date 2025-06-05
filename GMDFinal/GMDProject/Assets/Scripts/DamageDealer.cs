@@ -7,8 +7,8 @@ public class DamageDealer : MonoBehaviour
 
     [Header("Damage Upgrade Settings")]
     public float baseMultiplier = 1f;
-    public float multiplierStep = 0.2f;
-    public int maxDamageLevel = 5;
+    public float multiplierStep = 0.5f;
+    public int maxDamageLevel = 10;
 
     private int damageLevel = 0;
     private float damageMultiplier;
