@@ -44,6 +44,7 @@ public class ExperienceManager : MonoBehaviour
         currentLevel++;
         experienceToNextLevel = Mathf.RoundToInt(experienceToNextLevel * experienceGrowthRate);
         OnLevelUp?.Invoke(currentLevel);
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.levelUpClip);
     }
 
     public void ResetExperience()
