@@ -52,6 +52,12 @@ public class HealthComponent : MonoBehaviour, IDamageable
         {
             UIHandler.instance?.SetHealthValue(currentHealth / (float)maxHealth);
             UIHandler.instance?.SetHealthText(currentHealth, maxHealth);
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.hitPlayerClip);
+        }
+
+        if (!isPlayer)
+        {
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.hitEnemyClip);
         }
 
         if (currentHealth <= 0)
