@@ -30,6 +30,13 @@
             <ui:Button name="pause-mainmenu-button" text="Main Menu" class="menu-button" />
             <ui:Button name="pause-quit-button" text="Quit" class="menu-button" />
         </ui:VisualElement>
+        <ui:VisualElement name="UpgradePanel" class="upgrade-panel">
+            <ui:Label text="Choose Upgrade" class="upgrade-title" />
+            <ui:VisualElement class="upgrade-button-row">
+                <ui:Button name="upgrade-button-1" text="Upgrade A" class="menu-button upgrade-button" />
+                <ui:Button name="upgrade-button-2" text="Upgrade B" class="menu-button upgrade-button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
         <ui:VisualElement name="DeathPopup">
             <ui:Label name="DeathMessage" text="You Died!" style="unity-font-style: bold; font-size: 48px; color: rgb(152, 0, 0); text-align: center; -unity-font-style: bold; height: 72px; width: 299px; -unity-text-align: upper-center;" />
             <ui:Button name="restart-button" text="MainMenu" class="menu-button" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 26px;" />
