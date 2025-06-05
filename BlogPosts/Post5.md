@@ -76,5 +76,5 @@ Without proper directional animation, top-down movement can feel unresponsive or
 ## Summary of New Features
 Feature	Purpose & Benefit
 Pause Menu enables pausing gameplay without exiting; adds player agency and polish.
-Main Menu Reset	Ensures consistent, clean game starts; fixes bugs with extra spawns or projectiles.
+Main Menu Reset	ensures consistent, clean game starts and fixes bugs with extra spawns or projectiles.
 8-Direction Animation improves character clarity; supports better combat feedback and polish.
