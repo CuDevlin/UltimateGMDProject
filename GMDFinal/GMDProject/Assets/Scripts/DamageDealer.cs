@@ -1,8 +1,22 @@
 using UnityEngine;
+
 public class DamageDealer : MonoBehaviour
 {
+    [Header("Base Damage Settings")]
     public int damageAmount = 1;
-    public float damageMultiplier = 1f;
+
+    [Header("Damage Upgrade Settings")]
+    public float baseMultiplier = 1f;
+    public float multiplierStep = 0.2f;
+    public int maxDamageLevel = 5;
+
+    private int damageLevel = 0;
+    private float damageMultiplier;
+
+    private void Awake()
+    {
+        damageMultiplier = baseMultiplier;
+    }
 
     private void Start()
     {
@@ -30,9 +44,10 @@ public class DamageDealer : MonoBehaviour
         IDamageable damageable = target.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(Mathf.RoundToInt(damageAmount * damageMultiplier));
+            int finalDamage = Mathf.RoundToInt(damageAmount * damageMultiplier);
+            damageable.TakeDamage(finalDamage);
 
-            // Optional: apply knockback if needed
+            // Optional: apply knockback
             Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
@@ -44,7 +59,16 @@ public class DamageDealer : MonoBehaviour
 
     public void ApplyLevelUpBonus()
     {
-        Debug.Log("Applying level up bonus to damage dealer.");
-        damageMultiplier += 0.1f;
+        IncreaseDamageLevel();
+    }
+
+    public void IncreaseDamageLevel()
+    {
+        if (damageLevel < maxDamageLevel)
+        {
+            damageLevel++;
+            damageMultiplier = baseMultiplier + damageLevel * multiplierStep;
+            Debug.Log($"Damage level increased to {damageLevel}. New multiplier: {damageMultiplier:0.00}");
+        }
     }
 }
