@@ -7,9 +7,9 @@ Devlin Onichuk
 
 ## Expanding Core Systems: UI Menus, Game States, Animations, and Audio
 
-This development phase pushed our project beyond the foundational gameplay mechanics by adding critical polish and functionality that enhance player control, clarity, and immersion. Major improvements include a robust **Pause Menu**, better **game state management**, detailed **8-directional animations**, and an integrated **audio system** for background music and sound effects.
+This final development phase pushed our project beyond the foundational gameplay mechanics by adding critical functionality that enhances player control, clarity, and immersion. Major improvements include a **Pause Menu**, better **game state management**, and **8-directional animations**.
 
-These additions not only improve the moment-to-moment experience but lay the groundwork for a more scalable and professional arcade game framework.
+These additions improve the moment-to-moment experience and lay the groundwork for a more scalable and professional arcade game framework.
 
 ---
 
@@ -35,30 +35,28 @@ public void TogglePause()
     else PauseGame();
 }
 ```
-The PauseManager handles this logic cleanly, avoiding clutter in the main gameplay or UI scripts.
+The PauseManager handles this logic, avoiding clutter in the main gameplay or UI scripts.
 
 ## Proper Main Menu Reset
-Previously, returning to the Main Menu did not reset gameplay properly — resulting in issues like:
+Previously, returning to the Main Menu did not reset gameplay properly, resulting in issues like:
 
-A second player being spawned when restarting
+- A second player is being spawned when restarting
 
-Enemies continuing to spawn
+- Enemies are continuing to spawn
 
-Projectiles still floating or flying around
+- Projectiles are still floating or flying around
 
-This was resolved by expanding GameManager.ResetGame() to:
+- This was resolved by expanding GameManager.ResetGame() to:
 
-Stop enemy spawning and destroy all enemies
+- Stop enemy spawning and destroy all enemies
 
-Clear all active projectiles
+- Clear all active projectiles
 
-Disable and reposition the player
+- Disable and reposition the player
 
-Reset player stats (health, experience, level)
+- Reset player stats (health, experience, level)
 
-Hide gameplay UI and show the Main Menu
-
-Reset audio
+- Hide gameplay UI and show the Main Menu
 
 **Why It Matters:**
 Resetting the game state ensures the player always starts fresh. Without this, each session becomes unpredictable and chaotic, especially when testing or demoing the game. It also prevents memory leaks or gameplay logic errors from stacking between playthroughs.
@@ -73,28 +71,10 @@ animator.SetFloat("MoveY", moveInput.y);
 When no input is given, the character idles in the last moved direction, allowing directional aiming and consistent visual feedback.
 
 **Why It Matters:**
-Without proper directional animation, top-down movement can feel unresponsive or generic. By animating all 8 directions, movement becomes more readable and fluid, especially during fast-paced enemy encounters. It also supports future polish like directional attacks or aim-based mechanics.
-
-**Audio: Music and Sound Effects**
-**Background Music**
-The game now plays a looping music track during gameplay. The music stops when the game is paused or the player returns to the main menu, avoiding jarring overlaps.
-
-Uses a persistent AudioSource
-
-Fade in/out will be added later for smoother transitions
-
-**Projectile Firing Sound**
-When firing a projectile, a short sound clip plays using AudioSource.PlayOneShot(). This is triggered inside ProjectileShooter when the player successfully fires.
-
-```csharp
-audioSource.PlayOneShot(shootClip);
-Why It Matters:
-```
-Audio cues are essential for both feedback and immersion. The background music sets the tone of gameplay, while shooting sounds confirm player input and enhance satisfaction. In the future, more SFX will accompany hits, level-ups, and menu interactions.
+Without proper directional animation, top-down movement can feel unresponsive or generic. Animating all 8 directions makes movement more readable and fluid, especially during fast-paced enemy encounters. It also supports future polish like directional attacks or aim-based mechanics.
 
 ## Summary of New Features
 Feature	Purpose & Benefit
-Pause Menu	Enables pausing gameplay without exiting; adds player agency and polish.
+Pause Menu enables pausing gameplay without exiting; adds player agency and polish.
 Main Menu Reset	Ensures consistent, clean game starts; fixes bugs with extra spawns or projectiles.
-8-Direction Anim	Improves character clarity; supports better combat feedback and polish.
-SFX / Music	Adds atmosphere and responsive audio feedback for core actions.
+8-Direction Animation improves character clarity; supports better combat feedback and polish.
