@@ -5,10 +5,15 @@ https://github.com/CuDevlin/UltimateGMDProject/blob/main/BlogPosts/Post1.md
 
 ### Game Design Document
 https://github.com/CuDevlin/UltimateGMDProject/blob/main/BlogPosts/Post2GDD.md
+### Game Design Document
+https://github.com/CuDevlin/UltimateGMDProject/blob/main/BlogPosts/Post2GDD.md
 
+### Game Development Blog Post 3
 ### Game Development Blog Post 3
 https://github.com/CuDevlin/UltimateGMDProject/blob/main/BlogPosts/Post3.md
 
+### Game Development Blog Post 4
+https://github.com/CuDevlin/UltimateGMDProject/blob/main/BlogPosts/Post4.md
 ### Game Development Blog Post 4
 https://github.com/CuDevlin/UltimateGMDProject/blob/main/BlogPosts/Post4.md
 
